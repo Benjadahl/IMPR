@@ -23,8 +23,8 @@ int main(void) {
     largest = input1 > input2 ? input1 : input2;
 
     /* Handle 0-edge cases */
-    if (smallest == 0 || largest == 0) {
-      if (smallest == 0 && largest == 0) {
+    if (smallest == 0) {
+      if (largest == 0) {
         printf("Undefined\n");
       }
 
