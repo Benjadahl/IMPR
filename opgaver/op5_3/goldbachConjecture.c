@@ -12,6 +12,7 @@ int main (void) {
   printf("Enter min/max number for search: ");
   scanf("%d%d", &min, &max);
 
+
   for (c = evenCeil(min); c <= max; c += 2) {
     getGoldbachPairs(c);
   }
@@ -21,10 +22,17 @@ int main (void) {
 
 void getGoldbachPairs (int i) {
   int j;
+  int resolution = 0;
+
   for (j = 1; j <= i/2; j += 2) {
     if (is_prime(j) && is_prime(i - j)) {
       printf("%d = %d + %d\n", i, j, i - j);
+      resolution++;
     }
+  }
+
+  if (resolution > 0) {
+    printf("Resolution: %d\n", resolution);
   }
 }
 
