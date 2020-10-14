@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-ansi -pedantic -Wall
-TARGET=get_n_primes
+TARGET=goldbachConjecture
 
 $(TARGET).out: $(TARGET).c primes.o
 	$(CC) primes.o $(TARGET).c -o $(TARGET).out -lm $(CFLAGS)
