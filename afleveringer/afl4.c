@@ -50,8 +50,9 @@ void solveQuadraticEquation(double a, double b, double c){
 
   discriminant = getDiscriminant(a, b, c);
 
-  if (discriminant < 0)
+  if (discriminant < 0) {
     printf("No roots\n");
+  }
   else if (discriminant == 0){
     root1 = getRoot1(a, b, discriminant);
     printf("One root: %f\n", root1);
