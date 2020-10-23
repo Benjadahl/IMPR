@@ -1,6 +1,6 @@
 CC = gcc
 
-prog: ppm.o pixel.o
+prog: prog.c ppm.o pixel.o
 	$(CC) -lm prog.c pixel.o ppm.o -o prog
 
 ppm.o: ppm.h ppm.c

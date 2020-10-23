@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include "CuTest.h"
 
 /* Prototype functions */
 void solveQuadraticEquation(double a, double b, double c);
@@ -28,6 +29,28 @@ double getDiscriminant(double a, double b, double c) {
   double discriminant;
   discriminant = b * b - 4 * a * c;
   return discriminant;
+}
+
+/* Test discriminant function */
+void testGetDiscriminant1 (CuTest *tc) {
+  int actual = getDiscriminant(1, 2, 3);
+  int expected = -8;
+  CuAssertIntEquals(tc, expected, actual);
+}
+
+void testGetDiscriminant2 (CuTest *tc) {
+  int actual = getDiscriminant(2, 3, 4);
+  int expected = -23;
+  CuAssertIntEquals(tc, expected, actual);
+}
+
+CuSuite* getDiscriminantGetSuite() {
+  CuSuite* suite = CuSuiteNew();
+
+  SUITE_ADD_TEST(suite, testGetDiscriminant1);
+  SUITE_ADD_TEST(suite, testGetDiscriminant2);
+
+  return suite;
 }
 
 /* Calculate the first root given a, b and discriminant input */
