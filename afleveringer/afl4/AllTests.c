@@ -2,14 +2,14 @@
 
 #include "CuTest.h"
 
-CuSuite* StrUtilGetSuite();
+CuSuite* getDiscriminantGetSuite();
 
 void RunAllTests(void)
 {
 	CuString *output = CuStringNew();
 	CuSuite* suite = CuSuiteNew();
 
-	CuSuiteAddSuite(suite, (CuSuite*)getDiscriminantGetSuite());
+	CuSuiteAddSuite(suite, getDiscriminantGetSuite());
 
 	CuSuiteRun(suite);
 	CuSuiteSummary(suite, output);
