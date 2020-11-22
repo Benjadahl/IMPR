@@ -38,6 +38,7 @@ int main (void) {
   return 0;
 }
 
+/* Add a deck of cards randomly to a card array */
 void shuffle(card cards[], int amount, int types, int minRank, int maxRank) {
   int i = 0,
       t = 0,
@@ -67,6 +68,7 @@ void shuffle(card cards[], int amount, int types, int minRank, int maxRank) {
   }
 }
 
+/* Print an array of cards nicely formatted */
 void printCards (card cards[], int amount, int spacing) {
   int i = 0,
       j = 0;
@@ -83,6 +85,7 @@ void printCards (card cards[], int amount, int spacing) {
   printf("\n");
 }
 
+/* Print a card using unicode symbols */
 int printCard (card theCard) {
   char* type;
   char rank[10];
@@ -144,6 +147,7 @@ int printCard (card theCard) {
   );
 }
 
+/* Compare if one card needs to go before the next in the list */
 int compareCards(const void* c1, const void* c2) {
   card *card1 = (card *) c1;
   card *card2 = (card *) c2;
