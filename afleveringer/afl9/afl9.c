@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define cardsAmount 52
+#define cardsAmount 55
 
-typedef enum {clubs, diamonds, hearts, spades} cardType;
+typedef enum {clubs, diamonds, hearts, spades, joker} cardType;
 typedef enum {jack = 11, queen, king, ace} cardRank;
 
 typedef struct card
@@ -23,7 +23,7 @@ int main (void) {
 
   srand(time(NULL));
 
-  shuffle(cards, cardsAmount, 4, 2, 14);
+  shuffle(cards, cardsAmount, spades, 2, ace);
 
   printf("Unsorted cards:\n");
   printCards(cards, cardsAmount);
@@ -45,7 +45,7 @@ void shuffle(card cards[], int amount, int types, int minRank, int maxRank) {
     cards[i].rank = 0;
   }
 
-  for (t = 0; t < types; t++) {
+  for (t = 0; t <= types; t++) {
     for (r = minRank; r <= maxRank; r++) {
       int rndIndex = rand() % amount;
       
@@ -57,6 +57,12 @@ void shuffle(card cards[], int amount, int types, int minRank, int maxRank) {
       cards[rndIndex].rank = r;
     }
   }
+
+  for (i = 0; i < amount; i++) {
+    if (cards[i].rank == 0) {
+      cards[i].type = joker;
+    }
+  }
 }
 
 void printCards (card cards[], int amount) {
@@ -64,11 +70,12 @@ void printCards (card cards[], int amount) {
   
   for (i = 0; i < amount; i++) {
     printCard(cards[i]);
-    printf(", ");
+    printf(" ");
     if ((i + 1) % 4 == 0) {
       printf("\n");
     }
   }
+  printf("\n");
 }
 
 void printCard (card theCard) {
