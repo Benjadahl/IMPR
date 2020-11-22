@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define cardsAmount 55
-#define spacing 10
+#define space 10
 
 typedef enum {clubs, diamonds, hearts, spades, joker} cardType;
 typedef enum {jack = 11, queen, king, ace} cardRank;
@@ -16,7 +16,7 @@ typedef struct card
 } card;
 
 void shuffle(card cards[], int amount, int types, int minRank, int maxRank);
-void printCards (card cards[], int amount);
+void printCards (card cards[], int amount, int spacing);
 int printCard (card theCard);
 int compareCards(const void* c1, const void* c2);
 
@@ -28,12 +28,12 @@ int main (void) {
   shuffle(cards, cardsAmount, spades, 2, ace);
 
   printf("Unsorted cards:\n");
-  printCards(cards, cardsAmount);
+  printCards(cards, cardsAmount, space);
 
   qsort(cards, cardsAmount, sizeof(card), compareCards);
   
   printf("\nSorted cards:\n");
-  printCards(cards, cardsAmount);
+  printCards(cards, cardsAmount, space);
 
   return 0;
 }
@@ -67,7 +67,7 @@ void shuffle(card cards[], int amount, int types, int minRank, int maxRank) {
   }
 }
 
-void printCards (card cards[], int amount) {
+void printCards (card cards[], int amount, int spacing) {
   int i = 0,
       j = 0;
   
