@@ -13,34 +13,17 @@ typedef struct card
   cardRank rank;
 } card;
 
+void shuffle(card cards[], int amount, int types, int minRank, int maxRank);
 void printCards (card cards[], int amount);
 void printCard (card theCard);
 int compareCards(const void* c1, const void* c2);
 
 int main (void) {
   card cards[cardsAmount];
-  int i = 0,
-      t = 0,
-      r = 2;
 
   srand(time(NULL));
 
-  for (i = 0; i < cardsAmount; i++) {
-    cards[i].rank = 0;
-  }
-
-  for (t = 0; t < 4; t++) {
-    for (r = 2; r <= 14; r++) {
-      int rndIndex = rand() % cardsAmount;
-      
-      while (cards[rndIndex].rank != 0) {
-        rndIndex = (rndIndex + 1) % cardsAmount;
-      }
-
-      cards[rndIndex].type = t;
-      cards[rndIndex].rank = r;
-    }
-  }
+  shuffle(cards, cardsAmount, 4, 2, 14);
 
   printf("Unsorted cards:\n");
   printCards(cards, cardsAmount);
@@ -51,6 +34,29 @@ int main (void) {
   printCards(cards, cardsAmount);
 
   return 0;
+}
+
+void shuffle(card cards[], int amount, int types, int minRank, int maxRank) {
+  int i = 0,
+      t = 0,
+      r = 2;
+
+  for (i = 0; i < amount; i++) {
+    cards[i].rank = 0;
+  }
+
+  for (t = 0; t < types; t++) {
+    for (r = minRank; r <= maxRank; r++) {
+      int rndIndex = rand() % amount;
+      
+      while (cards[rndIndex].rank != 0) {
+        rndIndex = (rndIndex + 1) % amount;
+      }
+
+      cards[rndIndex].type = t;
+      cards[rndIndex].rank = r;
+    }
+  }
 }
 
 void printCards (card cards[], int amount) {
