@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #define cardsAmount 55
+#define spacing 10
 
 typedef enum {clubs, diamonds, hearts, spades, joker} cardType;
 typedef enum {jack = 11, queen, king, ace} cardRank;
@@ -15,7 +17,7 @@ typedef struct card
 
 void shuffle(card cards[], int amount, int types, int minRank, int maxRank);
 void printCards (card cards[], int amount);
-void printCard (card theCard);
+int printCard (card theCard);
 int compareCards(const void* c1, const void* c2);
 
 int main (void) {
@@ -66,11 +68,14 @@ void shuffle(card cards[], int amount, int types, int minRank, int maxRank) {
 }
 
 void printCards (card cards[], int amount) {
-  int i = 0;
+  int i = 0,
+      j = 0;
   
   for (i = 0; i < amount; i++) {
-    printCard(cards[i]);
-    printf(" ");
+    int printed = printCard(cards[i]);
+    for (j = printed; j <= spacing; j++) {
+      printf(" ");
+    }
     if ((i + 1) % 4 == 0) {
       printf("\n");
     }
@@ -78,10 +83,64 @@ void printCards (card cards[], int amount) {
   printf("\n");
 }
 
-void printCard (card theCard) {
-  printf(
-    "{Type: %d, Rank: %d}", 
-    theCard.type, theCard.rank
+int printCard (card theCard) {
+  char* type;
+  char rank[10];
+
+  switch (theCard.type)
+  {
+    case clubs:
+      type = "♣";
+      break;
+
+    case diamonds:
+      type = "♦";
+      break;
+
+    case hearts:
+      type = "♥";
+      break;
+
+    case spades:
+      type = "♠";
+      break;
+
+    case joker:
+      type = "J";
+      return printf("%s", type) + 2;
+      break;
+    
+    default:
+      type = "Na";
+      break;
+  }
+
+  switch (theCard.rank)
+  {
+    case 11:
+      strcpy(rank, "Jack");
+      break;
+    
+    case 12:
+      strcpy(rank, "Queen");
+      break;
+
+    case 13:
+      strcpy(rank,"King");
+      break;
+
+    case 14:
+      strcpy(rank,"Ace");
+      break;
+    
+    default:
+      sprintf(rank, "%d", theCard.rank);
+      break;
+  }
+
+  return printf(
+    "%s %s", 
+    type, rank
   );
 }
 
